@@ -6,48 +6,62 @@ import Graph as gp
 
 app = Flask(__name__)
 
+# Ruta principal del servidor
 @app.route('/')
 def index():
 
-    print("Pruebas con el algoritmo de Dijkstra y BFS") 
+    #Pruebas con el algoritmo de Dijkstra y BFS
 
+    # Se crea el grafo (con los id de los aeropuertos como
+    # nodos y con las rutas como aristas) y se cargan los aeropuertos
     grafo = nx.Graph() 
     grafo, airports = gp.initGraph()
 
-    print("-------------------------------------------")
-
-    print("Realizando pruebas con el algoritmo de Dijkstra")
-    caminov1 = dijkstrav2(grafo, '2789', '5415')
-    # print("Camino por Dijkstra: ", caminov1)
-    print("Camino: ", caminov1[1])  
-    peso_totalv1 = sum(nx.shortest_path_length(grafo, caminov1[1][i], caminov1[1][i+1], weight='weight') for i in range(len(caminov1[1])-1))
-    print("Peso total: ", peso_totalv1)
+    # Realizando pruebas con el algoritmo de Dijkstra
+    # CaminoDijkstra es una tupla que contiene el peso total y el 
+    # camino. El camino es una lista de los nodos que se deben recorrer
+    # PesototalDijkstra es el peso total del camino (suma de las distancias de las aristas)
+    caminoDijkstra = dijkstrav2(grafo, '2789', '5415')
+    print("Camino: ", caminoDijkstra[1])  
+    peso_totalDijkstra = sum(nx.shortest_path_length(grafo, caminoDijkstra[1][i], caminoDijkstra[1][i+1], weight='weight') for i in range(len(caminoDijkstra[1])-1))
+    print("Peso total: ", peso_totalDijkstra)
 
     print("-------------------------------------------") 
 
-    print("Realizando pruebas con el algoritmo de BFS")
-    camino = bfs(grafo, '2789', '5415')
-    print("Camino: ", camino)  
-    peso_total = sum(nx.shortest_path_length(grafo, camino[i], camino[i+1], weight='weight') for i in range(len(camino)-1))
-    print("Peso total: ", peso_total)
+    # Realizando pruebas con el algoritmo de BFS
+    # CaminoBFS es una lista de los nodos que se deben recorrer
+    # PesototalBFS es el peso total del camino (suma de las distancias de las aristas)
+    caminoBFS = bfs(grafo, '2789', '5415')
+    print("Camino: ", caminoBFS)  
+    peso_totalBFS = sum(nx.shortest_path_length(grafo, caminoBFS[i], caminoBFS[i+1], weight='weight') for i in range(len(caminoBFS)-1))
+    print("Peso total: ", peso_totalBFS)
 
     print("-------------------------------------------")
 
-    folium_map = gp.drawMap(grafo, caminov1[1], airports) 
+    # Se crea el mapa con el camino de Dijkstra
+    folium_map = gp.drawMap(grafo, caminoDijkstra[1], airports) 
+    # Se guarda el mapa en un archivo html
     folium_map.save('templates/mapDijkstra.html') 
 
     print("-------------------------------------------")
 
-    folium_map = gp.drawMap(grafo, camino, airports)
+    # Se crea el mapa con el camino de BFS
+    folium_map = gp.drawMap(grafo, caminoBFS, airports)
+    # Se guarda el mapa en un archivo html
     folium_map.save('templates/mapBFS.html')
 
+    # Se renderiza el index
     return render_template('index.html')
 
 
+# Se renderiza el mapa de Dijkstra
+# Se llama a esta ruta desde el index.html para mostrar el mapa
 @app.route('/mapDijkstra')
 def mapDijkstra():
     return render_template('mapDijkstra.html')
- 
+
+# Se renderiza el mapa de BFS
+# Se llama a esta ruta desde el index.html para mostrar el mapa
 @app.route('/mapBFS') 
 def mapBFS():
     return render_template('mapBFS.html')

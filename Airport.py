@@ -18,33 +18,32 @@ class Airport:
     
 class ListAirports:
     def __init__(self):
-        self.list = []
+        self.dict = {}
 
     def __str__(self):
-        return f"{self.list}"
+        return f"{self.dict}"
     
     def getList(self):
-        return self.list
+        return self.dict
     
-    def addAirport(self, airport):
-        self.list.append(airport)
+    def addAirport(self, id, info):
+        self.dict[id] = info
 
-    def getAirportByName(self, name):
-        for airport in self.list:
-            if airport.name == name:
-                return airport
-        return None
+    # def getAirportByName(self, name):
+    #     for airport in self.dict:
+    #         if airport.name == name:
+    #             return airport
+    #     return None
     
     def getAirportById(self, id):
-        for airport in self.list:
-            if airport.id == id:
-                return airport
+        if id in self.dict:
+            return self.dict[id]
         return None
     
     def getAirportByCountry(self, country):
         airports = []
-        for airport in self.list:
-            if airport.country == country:
+        for airport in self.dict.values():
+            if airport['country'] == country:
                 airports.append(airport)
         return airports
     
@@ -57,17 +56,29 @@ class ListAirports:
                     indice += 1
                     continue
 
-            
-                airport = Airport(
-                    row[0],         # id
-                    row[1],         # name
-                    row[2],         # city
-                    row[3],         # country
-                    float(row[6]),  # latitude
-                    float(row[7]),  # longitude
-                    float(row[8])   # altitude
-                    )
-                self.addAirport(airport)
+                # airport = Airport(
+                #     row[0],         # id
+                #     row[1],         # name
+                #     row[2],         # city
+                #     row[3],         # country
+                #     float(row[6]),  # latitude
+                #     float(row[7]),  # longitude
+                #     float(row[8])   # altitude
+                #     )
+                # self.addAirport(airport)
+
+                airport = {     
+                    # 'id': row[0],         # id
+                    'name': row[1],         # name
+                    'city': row[2],         # city
+                    'country': row[3],         # country
+                    'latitude': float(row[6]),  # latitude
+                    'longitude': float(row[7]),  # longitude
+                    'altitude': float(row[8])   # altitude
+                    }
+                
+                self.dict[row[0]] = airport
+
                 indice += 1
 
         print(f"Se han cargado {indice} aeropuertos")
