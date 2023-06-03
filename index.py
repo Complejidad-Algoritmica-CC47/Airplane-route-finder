@@ -1,11 +1,13 @@
-import sys
-import io 
-import networkx as nx
+from flask import Flask, render_template, request
 from Dijkstra import dijkstrav2
 from BFS import bfs
+import networkx as nx
 import Graph as gp 
 
-def main():
+app = Flask(__name__)
+
+@app.route('/')
+def index():
 
     print("Pruebas con el algoritmo de Dijkstra y BFS") 
 
@@ -32,13 +34,23 @@ def main():
     print("-------------------------------------------")
 
     folium_map = gp.drawMap(grafo, caminov1[1], airports) 
-    folium_map.save("maps/mapDikjstra.html") 
+    folium_map.save('templates/mapDijkstra.html') 
 
     print("-------------------------------------------")
 
     folium_map = gp.drawMap(grafo, camino, airports)
-    folium_map.save("maps/mapBFS.html")
+    folium_map.save('templates/mapBFS.html')
 
+    return render_template('index.html')
+
+
+@app.route('/mapDijkstra')
+def mapDijkstra():
+    return render_template('mapDijkstra.html')
+ 
+@app.route('/mapBFS') 
+def mapBFS():
+    return render_template('mapBFS.html')
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)

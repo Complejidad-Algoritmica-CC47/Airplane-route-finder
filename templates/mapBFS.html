@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d3ec079d2c864b2f8e9d5407d8844e15 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_d3ec079d2c864b2f8e9d5407d8844e15" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d3ec079d2c864b2f8e9d5407d8844e15 = L.map(
+                "map_d3ec079d2c864b2f8e9d5407d8844e15",
+                {
+                    center: [0, 0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 1,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_129198682216fbbdfd303fa9665c8f68 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+            var marker_83e12cda3bb2b3129c4142cc33edebc8 = L.marker(
+                [-12.0219, -77.114305],
+                {}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+            var icon_adb06b32c55abc567c7cf0619c735533 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "plane", "iconColor": "white", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_83e12cda3bb2b3129c4142cc33edebc8.setIcon(icon_adb06b32c55abc567c7cf0619c735533);
+        
+    
+        var popup_5239c4f6e9f28b99f31e9593c1ae6f93 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7c8b66cf5f5be6f3652fecce0d397dbc = $(`<div id="html_7c8b66cf5f5be6f3652fecce0d397dbc" style="width: 100.0%; height: 100.0%;">Jorge Chávez International Airport</div>`)[0];
+                popup_5239c4f6e9f28b99f31e9593c1ae6f93.setContent(html_7c8b66cf5f5be6f3652fecce0d397dbc);
+            
+        
+
+        marker_83e12cda3bb2b3129c4142cc33edebc8.bindPopup(popup_5239c4f6e9f28b99f31e9593c1ae6f93)
+        ;
+
+        
+    
+    
+            var marker_71b09eb0fa82f746433314ccf7edc1ff = L.marker(
+                [32.896801, -97.038002],
+                {}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+            var icon_901e12ddc08960b927573f90ba522164 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "plane", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_71b09eb0fa82f746433314ccf7edc1ff.setIcon(icon_901e12ddc08960b927573f90ba522164);
+        
+    
+        var popup_a970c7e853fef606bd689af8d96fc4a7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e19f3c16cd288417d6ee15dfb4692ef8 = $(`<div id="html_e19f3c16cd288417d6ee15dfb4692ef8" style="width: 100.0%; height: 100.0%;">Dallas Fort Worth International Airport</div>`)[0];
+                popup_a970c7e853fef606bd689af8d96fc4a7.setContent(html_e19f3c16cd288417d6ee15dfb4692ef8);
+            
+        
+
+        marker_71b09eb0fa82f746433314ccf7edc1ff.bindPopup(popup_a970c7e853fef606bd689af8d96fc4a7)
+        ;
+
+        
+    
+    
+            var marker_da519dafc2f000560a72c02002d3b849 = L.marker(
+                [-27.38419914245605, 153.11700439453125],
+                {}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+            var icon_827e3f364b18cc0fdc9f8434788ee30a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "plane", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_da519dafc2f000560a72c02002d3b849.setIcon(icon_827e3f364b18cc0fdc9f8434788ee30a);
+        
+    
+        var popup_15da600eac55a31819dfc5e257c4af24 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7f73e981223315d7fd34a3fc3ee69c4b = $(`<div id="html_7f73e981223315d7fd34a3fc3ee69c4b" style="width: 100.0%; height: 100.0%;">Brisbane International Airport</div>`)[0];
+                popup_15da600eac55a31819dfc5e257c4af24.setContent(html_7f73e981223315d7fd34a3fc3ee69c4b);
+            
+        
+
+        marker_da519dafc2f000560a72c02002d3b849.bindPopup(popup_15da600eac55a31819dfc5e257c4af24)
+        ;
+
+        
+    
+    
+            var marker_05352c7ea8eeacb14fb674477149f3f4 = L.marker(
+                [-9.4280004501343, 160.05499267578],
+                {}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+            var icon_81582ad08e1b9486ca254044a5510754 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "plane", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_05352c7ea8eeacb14fb674477149f3f4.setIcon(icon_81582ad08e1b9486ca254044a5510754);
+        
+    
+        var popup_493a33cde936a3a5a53455c428ebac99 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8509ecb4fe46451a088683068f9337ba = $(`<div id="html_8509ecb4fe46451a088683068f9337ba" style="width: 100.0%; height: 100.0%;">Honiara International Airport</div>`)[0];
+                popup_493a33cde936a3a5a53455c428ebac99.setContent(html_8509ecb4fe46451a088683068f9337ba);
+            
+        
+
+        marker_05352c7ea8eeacb14fb674477149f3f4.bindPopup(popup_493a33cde936a3a5a53455c428ebac99)
+        ;
+
+        
+    
+    
+            var marker_e98a2c849ae8a046d5839bf4a0153a45 = L.marker(
+                [-9.86166954041, 160.824996948],
+                {}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+            var icon_823a23666045edb40dc6fa183899b6a3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "plane", "iconColor": "white", "markerColor": "green", "prefix": "fa"}
+            );
+            marker_e98a2c849ae8a046d5839bf4a0153a45.setIcon(icon_823a23666045edb40dc6fa183899b6a3);
+        
+    
+        var popup_fa8853a2d9e02dc4c43d1957a9b4f520 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_954accae2852ec2f3f5d53aba2029a93 = $(`<div id="html_954accae2852ec2f3f5d53aba2029a93" style="width: 100.0%; height: 100.0%;">Marau Airport</div>`)[0];
+                popup_fa8853a2d9e02dc4c43d1957a9b4f520.setContent(html_954accae2852ec2f3f5d53aba2029a93);
+            
+        
+
+        marker_e98a2c849ae8a046d5839bf4a0153a45.bindPopup(popup_fa8853a2d9e02dc4c43d1957a9b4f520)
+        ;
+
+        
+    
+    
+            var poly_line_4a2a37d58b3742cd0a4aa586bd184b69 = L.polyline(
+                [[-12.0219, -77.114305], [32.896801, -97.038002]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+        var popup_599feaafe7fe388ba2b0967952a850b2 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6cd3d2635fe71196123a5e5a1909280e = $(`<div id="html_6cd3d2635fe71196123a5e5a1909280e" style="width: 100.0%; height: 100.0%;">Peso: 5403.168612208289</div>`)[0];
+                popup_599feaafe7fe388ba2b0967952a850b2.setContent(html_6cd3d2635fe71196123a5e5a1909280e);
+            
+        
+
+        poly_line_4a2a37d58b3742cd0a4aa586bd184b69.bindPopup(popup_599feaafe7fe388ba2b0967952a850b2)
+        ;
+
+        
+    
+    
+            var poly_line_527c7929af22ee3412af2c7765f5583b = L.polyline(
+                [[32.896801, -97.038002], [-27.38419914245605, 153.11700439453125]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+        var popup_6a70bffd1475efc2b9451d6615084638 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_34a8ab010053493cbb3c1ab196d7d2a9 = $(`<div id="html_34a8ab010053493cbb3c1ab196d7d2a9" style="width: 100.0%; height: 100.0%;">Peso: 13363.135681638265</div>`)[0];
+                popup_6a70bffd1475efc2b9451d6615084638.setContent(html_34a8ab010053493cbb3c1ab196d7d2a9);
+            
+        
+
+        poly_line_527c7929af22ee3412af2c7765f5583b.bindPopup(popup_6a70bffd1475efc2b9451d6615084638)
+        ;
+
+        
+    
+    
+            var poly_line_6b030c9e5d9e18240dbc211d80cb8159 = L.polyline(
+                [[-27.38419914245605, 153.11700439453125], [-9.4280004501343, 160.05499267578]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+        var popup_bac4e3e940d68608308039297b49dca4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_aa7340333086e1a939e24cb126edc684 = $(`<div id="html_aa7340333086e1a939e24cb126edc684" style="width: 100.0%; height: 100.0%;">Peso: 2117.08933654033</div>`)[0];
+                popup_bac4e3e940d68608308039297b49dca4.setContent(html_aa7340333086e1a939e24cb126edc684);
+            
+        
+
+        poly_line_6b030c9e5d9e18240dbc211d80cb8159.bindPopup(popup_bac4e3e940d68608308039297b49dca4)
+        ;
+
+        
+    
+    
+            var poly_line_67f81813ae5868073c992c88e7d61df7 = L.polyline(
+                [[-9.4280004501343, 160.05499267578], [-9.86166954041, 160.824996948]],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d3ec079d2c864b2f8e9d5407d8844e15);
+        
+    
+        var popup_7a23630a0d190ad909718825ee9d17f6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6a8f68322e44e606b7d60dbf48f6a2a9 = $(`<div id="html_6a8f68322e44e606b7d60dbf48f6a2a9" style="width: 100.0%; height: 100.0%;">Peso: 97.1757879911809</div>`)[0];
+                popup_7a23630a0d190ad909718825ee9d17f6.setContent(html_6a8f68322e44e606b7d60dbf48f6a2a9);
+            
+        
+
+        poly_line_67f81813ae5868073c992c88e7d61df7.bindPopup(popup_7a23630a0d190ad909718825ee9d17f6)
+        ;
+
+        
+    
+</script>
+</html>
