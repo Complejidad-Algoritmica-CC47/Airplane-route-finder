@@ -86,6 +86,7 @@ class ListRoutes:
         self.list.append(route)
 
     def addFromCSV(self, filename):
+        print(f"Leyendo archivo {filename}")
         indice = 0
         with open(filename, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)

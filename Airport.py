@@ -43,14 +43,24 @@ class ListAirports:
         return airports
     
     def addFromCSV(self, filename):
+        print(f"Leyendo archivo {filename}")
+        indice = 0
         with open(filename, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
             for row in reader:
+                if indice == 0:
+                    indice += 1
+                    continue
+
+            
                 airport = Airport(
                     row[1],         # name
+                    row[2],         # city
                     row[3],         # country
                     float(row[6]),  # latitude
                     float(row[7]),  # longitude
                     float(row[8])   # altitude
                     )
                 self.addAirport(airport)
+                indice += 1
+        print(f"Se han cargado {indice} aeropuertos")

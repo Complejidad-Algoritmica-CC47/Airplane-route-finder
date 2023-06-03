@@ -1,6 +1,8 @@
 import sys
 import io
 import networkx as nx
+import folium as fl
+from Airport import Airport, ListAirports
 import Route as rts
 from DijkstraNetworkx import dijkstrav2
 from v1BFS import bfs
@@ -8,10 +10,16 @@ from v1BFS import bfs
 # Configurar la salida estándar con una codificación adecuada
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
+print("Pruebas con el algoritmo de Dijkstra y BFS")
+
 grafo = nx.Graph()
 listWeightedNodes = []
+
 routes = rts.ListRoutes()
 routes.addFromCSV('unionDatav2.csv')
+
+airports = ListAirports()
+airports.addFromCSV('airports.csv')
 
 # Recorrer la lista de rutas de aviones y agregar los nodos al grafo
 for route in routes.getList():
@@ -26,7 +34,7 @@ for route in routes.getList():
             longitud_destino = float(route.getDestinationLongitude())
         except:
             continue
-        
+         
         distancia = route.getDistance()
     
         if not grafo.has_node(origen):
@@ -37,8 +45,6 @@ for route in routes.getList():
 
         nodo = (origen, destino, distancia)
         listWeightedNodes.append(nodo)
-    
-
     
 grafo.add_weighted_edges_from(listWeightedNodes)
 
@@ -54,7 +60,76 @@ print("Peso total: ", peso_totalv1)
 print("-------------------------------------------")
 
 print("Realizando pruebas con el algoritmo de BFS")
-camino = bfs(grafo, 'Jorge Chávez International Airport', 'Begishevo Airport')
+camino = bfs(grafo, 'Lyon Saint-Exupéry Airport', 'Jorge Chávez International Airport') 
 print("Camino: ", camino)
 peso_total = sum(nx.shortest_path_length(grafo, camino[i], camino[i+1], weight='weight') for i in range(len(camino)-1))
 print("Peso total: ", peso_total)
+
+print("-------------------------------------------")
+
+def calcular_peso(airport1, airport2):
+    return nx.shortest_path_length(grafo, airport1, airport2, weight='weight')
+
+def drawMap(camino, listAirports: ListAirports):
+    map = fl.Map()
+    airportsAdded = []
+    routesPositions = []
+    colors = [
+        'red', 'blue', 'green', 'darkred', 'lightred', 'orange', 'beige', 'gray',
+        'darkgreen', 'lightgreen', 'darkblue', 'lightblue', 'purple', 'darkpurple',
+        'pink', 'cadetblue', 'lightgray', 'black']
+    
+    for arpt in camino:
+        if arpt not in airportsAdded:
+            if arpt == camino[0]:
+                _color = 'red'
+            elif arpt == camino[-1]:
+                _color = 'green'
+            else:
+                _color = 'blue'
+
+            airportsAdded.append(arpt)
+
+            print("Aeropuerto: ", arpt)
+            airport: Airport = listAirports.getAirportByName(arpt)
+            airportPosition = airport.getPosition()
+            routesPositions.append(airportPosition)
+            map.add_child(
+                fl.Marker(location=airportPosition[0:2],
+                            popup=arpt,
+                            icon=fl.Icon(prefix="fa", 
+                                        icon="plane",
+                                        color=_color)
+            ))
+        
+    # Iterar sobre la ruta y agregar las aristas con los pesos como popup
+    for i in range(len(camino) - 1):
+        airport1 = camino[i]
+        airport2 = camino[i + 1]
+        position1 = listAirports.getAirportByName(airport1).getPosition()
+        position2 = listAirports.getAirportByName(airport2).getPosition()
+        
+        if position1 and position2:
+            # Calcular el peso entre los aeropuertos 
+            # print("Aeropuerto 1: ", airport1)
+            # print("Aeropuerto 2: ", airport2)
+            peso = calcular_peso(airport1, airport2)
+            # print("Peso: ", peso)
+            
+            # Crear la arista y agregar el popup con el peso
+            fl.PolyLine([position1, position2], color='purple', weight=2, opacity=0.5,
+                            popup=f'Peso: {peso}').add_to(map)
+            
+    # print("Rutas: ", grafo.edges(data=True))
+    # fl.PolyLine(routesPositions, color=colors.pop(0), weight=2, opacity=0.6).add_to(map)
+    return map
+ 
+
+folium_map = drawMap(caminov1[1], airports)
+folium_map.save("mapDikjstra.html") 
+
+print("-------------------------------------------")
+
+folium_map = drawMap(camino, airports)
+folium_map.save("mapBFS.html")
+
