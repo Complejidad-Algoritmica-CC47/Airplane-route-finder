@@ -1,6 +1,5 @@
 import csv
 
-
 class Airport:
     def __init__(self, id, name, city, country, latitude, longitude, altitude):
         self.id = id
@@ -50,7 +49,6 @@ class ListAirports:
         return airports
     
     def addFromCSV(self, filename):
-        print(f"Leyendo archivo {filename}")
         indice = 0
         with open(filename, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
@@ -71,4 +69,5 @@ class ListAirports:
                     )
                 self.addAirport(airport)
                 indice += 1
+
         print(f"Se han cargado {indice} aeropuertos")

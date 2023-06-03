@@ -1,7 +1,6 @@
 import csv
 from Airport import Airport
 
-
 class Route (object):
     def __init__(self, 
                     sourceId,
@@ -39,7 +38,6 @@ class Route (object):
                     destinationAltitude
                     )
         self.distance = distance
-
 
     def __str__(self):
         return f"Origen: {self.source} -> Destino: {self.destination} -> Distancia: {self.distance}"
@@ -96,7 +94,6 @@ class ListRoutes:
         self.list.append(route)
 
     def addFromCSV(self, filename):
-        print(f"Leyendo archivo {filename}")
         indice = 0
         with open(filename, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
@@ -124,5 +121,7 @@ class ListRoutes:
                     )
                 self.addRoute(route)
                 indice += 1
+        
+        print(f"Se han leído {indice} rutas de aviones")
 
-            print(f"Se han leído {indice} rutas de aviones")
+            
