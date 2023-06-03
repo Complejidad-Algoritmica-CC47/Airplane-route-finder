@@ -24,8 +24,11 @@ airports.addFromCSV('airports.csv')
 # Recorrer la lista de rutas de aviones y agregar los nodos al grafo
 for route in routes.getList():
         
-        origen = route.getSource()
-        destino = route.getDestination()
+        # origen = route.getSourceName()
+        # destino = route.getDestinationName()
+
+        origen = route.getSourceId()
+        destino = route.getDestinationId()
     
         try: 
             latitud_origen = float(route.getSourceLatitude())
@@ -51,17 +54,17 @@ grafo.add_weighted_edges_from(listWeightedNodes)
 print("-------------------------------------------")
 
 print("Realizando pruebas con el algoritmo de Dijkstra")
-caminov1 = dijkstrav2(grafo, 'Jorge Chávez International Airport', 'Begishevo Airport')
+caminov1 = dijkstrav2(grafo, '2789', '5415') # Jorge Chávez International Airport, Begishevo Airport
 print("Camino por Dijkstra: ", caminov1)
-print("Camino: ", caminov1[1])
+print("Camino: ", caminov1[1])  
 peso_totalv1 = sum(nx.shortest_path_length(grafo, caminov1[1][i], caminov1[1][i+1], weight='weight') for i in range(len(caminov1[1])-1))
 print("Peso total: ", peso_totalv1)
 
-print("-------------------------------------------")
+print("-------------------------------------------") 
 
 print("Realizando pruebas con el algoritmo de BFS")
-camino = bfs(grafo, 'Lyon Saint-Exupéry Airport', 'Jorge Chávez International Airport') 
-print("Camino: ", camino)
+camino = bfs(grafo, '2789', '5415') # Jorge Chávez International Airport, Begishevo Airport
+print("Camino: ", camino)  
 peso_total = sum(nx.shortest_path_length(grafo, camino[i], camino[i+1], weight='weight') for i in range(len(camino)-1))
 print("Peso total: ", peso_total)
 
@@ -74,10 +77,6 @@ def drawMap(camino, listAirports: ListAirports):
     map = fl.Map()
     airportsAdded = []
     routesPositions = []
-    colors = [
-        'red', 'blue', 'green', 'darkred', 'lightred', 'orange', 'beige', 'gray',
-        'darkgreen', 'lightgreen', 'darkblue', 'lightblue', 'purple', 'darkpurple',
-        'pink', 'cadetblue', 'lightgray', 'black']
     
     for arpt in camino:
         if arpt not in airportsAdded:
@@ -91,23 +90,23 @@ def drawMap(camino, listAirports: ListAirports):
             airportsAdded.append(arpt)
 
             print("Aeropuerto: ", arpt)
-            airport: Airport = listAirports.getAirportByName(arpt)
+            airport: Airport = listAirports.getAirportById(arpt)
             airportPosition = airport.getPosition()
             routesPositions.append(airportPosition)
             map.add_child(
                 fl.Marker(location=airportPosition[0:2],
-                            popup=arpt,
+                            popup=airport.name,
                             icon=fl.Icon(prefix="fa", 
                                         icon="plane",
                                         color=_color)
-            ))
+            )) 
         
     # Iterar sobre la ruta y agregar las aristas con los pesos como popup
     for i in range(len(camino) - 1):
         airport1 = camino[i]
         airport2 = camino[i + 1]
-        position1 = listAirports.getAirportByName(airport1).getPosition()
-        position2 = listAirports.getAirportByName(airport2).getPosition()
+        position1 = listAirports.getAirportById(airport1).getPosition()
+        position2 = listAirports.getAirportById(airport2).getPosition()
         
         if position1 and position2:
             # Calcular el peso entre los aeropuertos 

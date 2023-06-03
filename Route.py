@@ -4,12 +4,14 @@ from Airport import Airport
 
 class Route (object):
     def __init__(self, 
+                    sourceId,
                     sourceName,
                     sourceCity,
                     sourceCountry, 
                     sourceLatitude,
                     sourceLongitude,
                     sourceAltitude,
+                    destinationId,
                     destinationName,
                     destinationCity,
                     destinationCountry,
@@ -19,6 +21,7 @@ class Route (object):
                     distance
                     ):
         self.source = Airport(
+                    sourceId,
                     sourceName,
                     sourceCity,
                     sourceCountry,
@@ -27,6 +30,7 @@ class Route (object):
                     sourceAltitude
                     )
         self.destination = Airport(
+                    destinationId,
                     destinationName,
                     destinationCity,
                     destinationCountry,
@@ -43,7 +47,10 @@ class Route (object):
     def getRoute(self):
         return (self.source, self.destination, self.distance)
     
-    def getSource(self):
+    def getSourceId(self):
+        return self.source.id
+    
+    def getSourceName(self):
         return self.source.name
     
     def getSourceLatitude(self):
@@ -55,7 +62,10 @@ class Route (object):
     def getSourceAltitude(self):
         return self.source.altitude
     
-    def getDestination(self):
+    def getDestinationId(self):
+        return self.destination.id
+    
+    def getDestinationName(self):
         return self.destination.name
     
     def getDestinationLatitude(self):
@@ -96,12 +106,14 @@ class ListRoutes:
                     continue
 
                 route = Route(
+                    row[3],         # sourceId
                     row[4],         # sourceName
                     row[5],         # sourceCity
                     row[6],         # sourceCountry
                     float(row[7]),  # sourceLatitude
                     float(row[8]),  # sourceLongitude
                     float(row[9]),  # sourceAltitude
+                    row[12],        # destinationId
                     row[13],        # destinationName
                     row[14],        # destinationCity
                     row[15],        # destinationCountry

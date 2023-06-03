@@ -2,7 +2,8 @@ import csv
 
 
 class Airport:
-    def __init__(self, name, city, country, latitude, longitude, altitude):
+    def __init__(self, id, name, city, country, latitude, longitude, altitude):
+        self.id = id
         self.name = name
         self.city = city
         self.country = country
@@ -35,6 +36,12 @@ class ListAirports:
                 return airport
         return None
     
+    def getAirportById(self, id):
+        for airport in self.list:
+            if airport.id == id:
+                return airport
+        return None
+    
     def getAirportByCountry(self, country):
         airports = []
         for airport in self.list:
@@ -54,6 +61,7 @@ class ListAirports:
 
             
                 airport = Airport(
+                    row[0],         # id
                     row[1],         # name
                     row[2],         # city
                     row[3],         # country
