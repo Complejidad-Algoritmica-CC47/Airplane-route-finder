@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import sympy as sp
 
 def dijkstrav2(G,u,v):
+    print("Iniciando Dijkstra...")
     masinf=float('inf')
     vertices=list(G.nodes)
     distancias={w:masinf for w in vertices}

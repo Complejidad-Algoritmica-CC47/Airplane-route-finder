@@ -1,6 +1,8 @@
 import networkx as nx
 
 def bfs(graph, start_node, end_node):
+    print("Iniciando BFS...")
+
     visited = set()
     queue = []
 
