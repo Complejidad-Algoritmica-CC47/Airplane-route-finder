@@ -1,4 +1,112 @@
 .mapa{
     width: 100%;
-    height: 450px;
+    height: 500px;
+    background-color: #fff;
+}
+
+h2{
+    margin-top: 30px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 0;
+    background-color: #fff;
+    color:#00000098;
+    padding:10px;
+    width: 99.1%;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 3px solid #e8e4e4;
+}
+body{
+    color: #000;
+    font-family: 'Consolas', sans-serif;
+    background: linear-gradient(45deg,  #14114A, #017499);
+    background-size: 200% 200%;
+    animation: gradient-animation 3s linear infinite;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+.formulario{
+    width: 100%;
+    height: 300px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.formulario form{
+    background-color: rgba(255, 255, 255, 0.947);
+    border: 1px #ffffffd3 solid;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 55px;
+}
+.form-control{
+    width: 280px;
+    height:30px;
+    border-radius: 5px;
+}
+
+.formulario label{
+    margin-left: 20px;
+    display: block;
+    margin-bottom: 7px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.formulario input{
+    margin-left: 20px;
+    width: 98%;
+    height: 30px;
+}
+
+h1{
+    text-align: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;    
+    color:#fff;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
+    margin-top: 0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(244, 69%, 19%, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: border-box;
+}
+button{
+    color: #000;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    padding: .5rem 1.5rem;
+    background: rgba(31, 31, 87, 0.742);
+    border: 1px solid rgba(7, 23, 255, 0.185);
+    width: 170px;
+    margin-left: 20px;
+    margin-top: 25px;
+    border-radius: 5px;
+}
+button:hover {
+    color: rgba(6, 32, 6, 0.532);
+    background: #fff;
 }

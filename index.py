@@ -3,7 +3,7 @@ from Dijkstra import dijkstrav2
 from BFS import bfs
 import networkx as nx
 import Graph as gp 
-
+import csv
 app = Flask(__name__)
 
 grafo = nx.Graph()
@@ -24,7 +24,6 @@ def index():
     # nodos y con las rutas como aristas) y se cargan los aeropuertos
 
     if request.method == 'POST':
-        # Se obtienen los datos del formulario
         source_airport_id = request.form.get('sourceAirportId')
         destination_airport_id = request.form.get('destinationAirportId')
 

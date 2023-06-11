@@ -29,11 +29,11 @@ class ListAirports:
     def addAirport(self, id, info):
         self.dict[id] = info
 
-    # def getAirportByName(self, name):
-    #     for airport in self.dict:
-    #         if airport.name == name:
-    #             return airport
-    #     return None
+    def getAirportByName(self, name):
+     for airport in self.dict:
+            if airport.name == name:
+                 return airport
+            return None
     
     def getAirportById(self, id):
         if id in self.dict:
