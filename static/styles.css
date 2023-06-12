@@ -4,6 +4,24 @@
     background-color: #fff;
 }
 
+.map {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.map1 {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.anima {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h2{
     margin-top: 30px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
