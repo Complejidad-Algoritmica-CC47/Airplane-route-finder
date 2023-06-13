@@ -4,6 +4,7 @@ from BFS import bfs
 import networkx as nx
 import Graph as gp 
 import csv
+from Buscar_aeropuertos import guardar_aeropuertos, buscar_id, todo_numeros
 app = Flask(__name__)
 
 grafo = nx.Graph()
@@ -23,16 +24,29 @@ def index():
     # Se crea el grafo (con los id de los aeropuertos como
     # nodos y con las rutas como aristas) y se cargan los aeropuertos
 
+    lista_aeropuertos = []
+    guardar_aeropuertos('static/airports.csv', lista_aeropuertos)
+
     if request.method == 'POST':
-        source_airport_id = request.form.get('sourceAirportId')
-        destination_airport_id = request.form.get('destinationAirportId')
+        inputSourceAirport = request.form.get('sourceAirportId').upper()
+        inputDestinationAirport = request.form.get('destinationAirportId').upper()
+
+        if todo_numeros(inputSourceAirport):
+            source_airport_id = inputSourceAirport
+        else:
+            source_airport_id = buscar_id(inputSourceAirport, lista_aeropuertos)
+        
+        if todo_numeros(inputDestinationAirport):
+            destination_airport_id = inputDestinationAirport
+        else:
+            destination_airport_id = buscar_id(inputDestinationAirport, lista_aeropuertos)
 
         # Realizando pruebas con el algoritmo de Dijkstra
         # CaminoDijkstra es una tupla que contiene el peso total y el
         # camino. El camino es una lista de los nodos que se deben recorrer
         # PesototalDijkstra es el peso total del camino (suma de las distancias de las aristas)
         camino_dijkstra = dijkstrav2(grafo, source_airport_id, destination_airport_id)
-        print("Camino: ", camino_dijkstra)
+        print("Camino: ", camino_dijkstra[1])
 
         # peso_totalDijkstra = sum(nx.shortest_path_length(grafo, caminoDijkstra[1][i], caminoDijkstra[1][i+1], weight='weight') for i in range(len(caminoDijkstra[1])-1))
         # print("Peso total: ", peso_totalDijkstra)
@@ -40,13 +54,18 @@ def index():
         if not camino_dijkstra:
             folium_map = gp.cleanMap()
             folium_map.save('templates/mapDijkstra.html')
-
+            caminodijkstra = 'NO se encontró un camino de Dijkstra'
+            print("-------------------------------------------")
+            print("No se encontró un camino de Dijkstra")
         else:
             # Se crea el mapa con el camino de Dijkstra
             folium_map = gp.drawMap(grafo, camino_dijkstra[1], airports)
             mapDijkstra = folium_map
             # Se guarda el mapa en un archivo html
             folium_map.save('templates/mapDijkstra.html')
+            caminodijkstra = 'SI se encontró un camino de Dijkstra'
+            print("-------------------------------------------")
+            print("Se encontró un camino de Dijkstra")
 
         # Realizando pruebas con el algoritmo de BFS
         # CaminoBFS es una lista de los nodos que se deben recorrer
@@ -58,12 +77,18 @@ def index():
         if not camino_bfs:
             folium_map = gp.cleanMap()
             folium_map.save('templates/mapBFS.html')
+            caminobfs = 'NO se encontró un camino de BFS'
+            print("-------------------------------------------")
+            print("No se encontró un camino de BFS")
         else:
             # Se crea el mapa con el camino de BFS
             folium_map = gp.drawMap(grafo, camino_bfs, airports)
             mapBFS = folium_map
             # Se guarda el mapa en un archivo html
             folium_map.save('templates/mapBFS.html')
+            caminobfs = 'SI se encontró un camino de BFS'
+            print("-------------------------------------------")
+            print("Se encontró un camino de BFS")
 
         # return render_template('index.html', caminobfs=caminobfs, caminodijkstra=caminodijkstra)
         return redirect(url_for('index'))
@@ -109,6 +134,7 @@ def index():
 #
 #     # Se renderiza el index
 #     return render_template('index.html')  # , caminoDijkstra=caminoDijkstra[1], peso_totalDijkstra=peso_totalDijkstra)
+#
 
 
 # Se renderiza el mapa de Dijkstra
