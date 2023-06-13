@@ -15,6 +15,9 @@ class Airport:
     
     def getPosition(self):
         return (self.latitude, self.longitude)
+
+    def getId(self):
+        return self.id
     
 class ListAirports:
     def __init__(self):
@@ -30,10 +33,10 @@ class ListAirports:
         self.dict[id] = info
 
     def getAirportByName(self, name):
-     for airport in self.dict:
-            if airport.name == name:
-                 return airport
-            return None
+        for key, airport in self.dict.items():
+            if airport['name'] == name:
+                 return key
+        return None
     
     def getAirportById(self, id):
         if id in self.dict:
@@ -46,6 +49,18 @@ class ListAirports:
             if airport['country'] == country:
                 airports.append(airport)
         return airports
+    
+    def getAirportIdByIATA(self, iata):
+        for key, airport in self.dict.items():
+            if airport['iata'] == iata:
+                return key
+        return None
+    
+    def getAirportIdByICAO(self, icao):
+        for key, airport in self.dict.items():
+            if airport['icao'] == icao:
+                return key
+        return None
     
     def addFromCSV(self, filename):
         indice = 0
@@ -74,7 +89,9 @@ class ListAirports:
                     'country': row[3],         # country
                     'latitude': float(row[6]),  # latitude
                     'longitude': float(row[7]),  # longitude
-                    'altitude': float(row[8])   # altitude
+                    'altitude': float(row[8]),   # altitude
+                    'iata': row[4],          # codigo IATA
+                    'icao': row[5],          # codigo ICAO
                     }
                 
                 self.dict[row[0]] = airport
