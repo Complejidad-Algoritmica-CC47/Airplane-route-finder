@@ -22,6 +22,23 @@
     margin-right: auto;
 }
 
+.botton_e_informacion {
+    display: flex;
+    flex-direction: row;
+}
+
+.datos {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.datos label{
+    display: inline-block;
+    text-align: center;
+    color: whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h2{
     margin-top: 30px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -57,6 +74,7 @@ body{
 
 .formulario{
     width: 100%;
+    height: 300px;
     margin-bottom: 10px;
     margin-right: 30px;
     display: flex;
@@ -64,20 +82,16 @@ body{
     justify-content:space-between;
 }
 .formulario form{
-    display: flex;
-    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.947);
     border: 1px #ffffffd3 solid;
     border-radius: 5px;
     width: 100%;
-    margin-top: 75px;
-
-    padding: 20px 35px;
+    margin-top: 55px;
 }
 .form-control{
-    width: 100%;
-    height:50px;
-    border-radius: 10px;
+    width: 280px;
+    height:30px;
+    border-radius: 5px;
 }
 
 .formulario label{
@@ -89,8 +103,8 @@ body{
 }
 
 .formulario input{
-    /*Centrar este elemento*/
-    width: 100%;
+    margin-left: 20px;
+    width: 98%;
     height: 30px;
 }
 
@@ -123,12 +137,14 @@ button{
     background: rgba(31, 31, 87, 0.742);
     border: 1px solid rgba(7, 23, 255, 0.185);
     width: 170px;
-    margin-top: 20px;
-    /* margin-left: 20px;
-    margin-top: 25px; */
+    margin-left: 20px;
+    margin-top: 25px;
     border-radius: 5px;
 }
 button:hover {
-    background: rgba(85, 85, 194, 0.742);
-    cursor: pointer;
+    color: rgba(6, 32, 6, 0.532);
+    background: #fff;
+}
+.botton_e_informacion label {
+    margin-top: 28px;
 }
