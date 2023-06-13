@@ -14,7 +14,8 @@ def guardar_aeropuertos(filename, lista):
                 indice += 1
                 continue
 
-            aeropuerto = {     
+            aeropuerto = {
+                'indice': len(lista),   # indice dentro de la lista
                 'id': row[0],         # id
                 'name': cambiar_texto(row[1]).upper(),         # name
                 'iata': row[4],          # codigo IATA
@@ -41,6 +42,11 @@ def buscar_id(input, lista):
             if lista[i]['name'] == input:
                 return lista[i]['id']
         print("!!!No se pudo encontrar un aeropuerto con ese nombre!")
+
+def buscar_indice(id, lista):
+    for i in range(len(lista)):
+                if lista[i]['id'] == id:
+                    return lista[i]['indice']
 
 def todo_numeros(string):
     return string.isdigit()
