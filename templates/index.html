@@ -9,19 +9,13 @@
     <div class="formulario">
         <form action="{{ url_for('index')}}" method="post">
             <label for="origen">Aeropuerto de Origen</label>
-            <input 
-                type="text" 
-                class="form-control" 
-                name="sourceAirportId" 
-                placeholder="   Ingrese el aeropuerto de origen...">
-
+            <input type="text" class="form-control" name="sourceAirportId" placeholder="   Ingrese el aeropuerto de origen...">
             <label for="destino" class="dest">Aeropuerto de Destino</label>
-            <input 
-                type="text" 
-                class="form-control" 
-                name="destinationAirportId" 
-                placeholder="  Ingrese el aeropuerto de destino...">
-            <button type="submit">Calcular</button>
+            <input type="text" class="form-control" name="destinationAirportId" placeholder="  Ingrese el aeropuerto de destino...">
+            <div class="botton_e_informacion">
+                <button type="submit">Calcular</button>
+                <label type="text" id="desde_hacia">origen -> destino</label>
+            </div>
         </form>
     </div>
 </div>
@@ -34,5 +28,12 @@
     <iframe class="mapa" src="{{ url_for('mapBFS') }}"></iframe>
 {#    <a href="{{ url_for('mapDijkstra') }}" target="_blank">Mapa de Dijsktra</a>#}
 {#    <a href="{{ url_for('mapBFS') }}" target="_blank">Mapa de BFS</a>#}
+</div>
+<div class="datos">
+    <br>
+    <label>Anthony Botello | Jessica Comettant | Bruce Fleck</label>
+    <br>
+    <br>
+    <label>UPC 2023</label>
 </div>
 {% endblock %}
