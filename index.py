@@ -32,7 +32,7 @@ def index():
         # camino. El camino es una lista de los nodos que se deben recorrer
         # PesototalDijkstra es el peso total del camino (suma de las distancias de las aristas)
         camino_dijkstra = dijkstrav2(grafo, source_airport_id, destination_airport_id)
-        print("Camino: ", camino_dijkstra[1])
+        print("Camino: ", camino_dijkstra)
 
         # peso_totalDijkstra = sum(nx.shortest_path_length(grafo, caminoDijkstra[1][i], caminoDijkstra[1][i+1], weight='weight') for i in range(len(caminoDijkstra[1])-1))
         # print("Peso total: ", peso_totalDijkstra)
@@ -40,18 +40,13 @@ def index():
         if not camino_dijkstra:
             folium_map = gp.cleanMap()
             folium_map.save('templates/mapDijkstra.html')
-            caminodijkstra = 'NO se encontró un camino de Dijkstra'
-            print("-------------------------------------------")
-            print("No se encontró un camino de Dijkstra")
+
         else:
             # Se crea el mapa con el camino de Dijkstra
             folium_map = gp.drawMap(grafo, camino_dijkstra[1], airports)
             mapDijkstra = folium_map
             # Se guarda el mapa en un archivo html
             folium_map.save('templates/mapDijkstra.html')
-            caminodijkstra = 'SI se encontró un camino de Dijkstra'
-            print("-------------------------------------------")
-            print("Se encontró un camino de Dijkstra")
 
         # Realizando pruebas con el algoritmo de BFS
         # CaminoBFS es una lista de los nodos que se deben recorrer
@@ -63,18 +58,12 @@ def index():
         if not camino_bfs:
             folium_map = gp.cleanMap()
             folium_map.save('templates/mapBFS.html')
-            caminobfs = 'NO se encontró un camino de BFS'
-            print("-------------------------------------------")
-            print("No se encontró un camino de BFS")
         else:
             # Se crea el mapa con el camino de BFS
             folium_map = gp.drawMap(grafo, camino_bfs, airports)
             mapBFS = folium_map
             # Se guarda el mapa en un archivo html
             folium_map.save('templates/mapBFS.html')
-            caminobfs = 'SI se encontró un camino de BFS'
-            print("-------------------------------------------")
-            print("Se encontró un camino de BFS")
 
         # return render_template('index.html', caminobfs=caminobfs, caminodijkstra=caminodijkstra)
         return redirect(url_for('index'))
@@ -120,7 +109,6 @@ def index():
 #
 #     # Se renderiza el index
 #     return render_template('index.html')  # , caminoDijkstra=caminoDijkstra[1], peso_totalDijkstra=peso_totalDijkstra)
-#
 
 
 # Se renderiza el mapa de Dijkstra

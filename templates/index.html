@@ -9,9 +9,18 @@
     <div class="formulario">
         <form action="{{ url_for('index')}}" method="post">
             <label for="origen">Aeropuerto de Origen</label>
-            <input type="text" class="form-control" name="sourceAirportId" placeholder="   Ingrese el aeropuerto de origen...">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="sourceAirportId" 
+                placeholder="   Ingrese el aeropuerto de origen...">
+
             <label for="destino" class="dest">Aeropuerto de Destino</label>
-            <input type="text" class="form-control" name="destinationAirportId" placeholder="  Ingrese el aeropuerto de destino...">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="destinationAirportId" 
+                placeholder="  Ingrese el aeropuerto de destino...">
             <button type="submit">Calcular</button>
         </form>
     </div>
