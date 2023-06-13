@@ -4,7 +4,7 @@ from BFS import bfs
 import networkx as nx
 import Graph as gp 
 import csv
-from Buscar_aeropuertos import guardar_aeropuertos, buscar_id, todo_numeros
+from Buscar_aeropuertos import guardar_aeropuertos, buscar_id, todo_numeros, buscar_indice
 app = Flask(__name__)
 
 grafo = nx.Graph()
@@ -41,6 +41,12 @@ def index():
         else:
             destination_airport_id = buscar_id(inputDestinationAirport, lista_aeropuertos)
 
+        indice_source = buscar_indice(source_airport_id, lista_aeropuertos)
+        nombre_source = lista_aeropuertos[indice_source]['name'] + "(" + lista_aeropuertos[indice_source]['iata'] + ")"
+        indice_destination = buscar_indice(destination_airport_id, lista_aeropuertos)
+        nombre_destination = lista_aeropuertos[indice_destination]['name'] + "(" + lista_aeropuertos[indice_destination]['iata'] + ")"
+        desde_hacia = nombre_source + " -> " + nombre_destination # <---------------------------
+        
         # Realizando pruebas con el algoritmo de Dijkstra
         # CaminoDijkstra es una tupla que contiene el peso total y el
         # camino. El camino es una lista de los nodos que se deben recorrer
@@ -90,7 +96,7 @@ def index():
             print("-------------------------------------------")
             print("Se encontró un camino de BFS")
 
-        # return render_template('index.html', caminobfs=caminobfs, caminodijkstra=caminodijkstra)
+        #return render_template('index.html', caminobfs=caminobfs, caminodijkstra=caminodijkstra)
         return redirect(url_for('index'))
 
     else:
@@ -153,7 +159,6 @@ def mapBFS():
     #return render_template('mapBFS.html')
     #return '<a href="mapBFS.html" target="_blank">Ver mapa BFS</a>'
     return send_from_directory('templates', 'mapBFS.html')
-
 
 @app.context_processor
 def inject_version():
