@@ -7,18 +7,19 @@ import csv
 app = Flask(__name__)
 
 grafo = nx.Graph()
-grafo, airports = gp.initGraph()
+grafo, airports, airportsListFull = gp.initGraph()
 
 mapDijkstra = gp.cleanMap()
 mapBFS = gp.cleanMap()
 
 @app.route('/', methods=['GET'])
 def index():
-    response = make_response(render_template("index.html"))
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0" 
-    return response
+    airportsList = airportsListFull          
+    # response = make_response(render_template("index.html"))
+    # response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    # response.headers["Pragma"] = "no-cache"
+    # response.headers["Expires"] = "0" 
+    return render_template('index.html', airportsList=airportsList)
 
 # Ruta principal del servidor
 @app.route('/', methods=['POST'])
@@ -27,41 +28,75 @@ def busqueda():
     destino = 'Pendiente'
     distanciaDijkstra = 0
     distanciaBFS = 0
-
+    airportsList = airportsListFull   
     # Pruebas con el algoritmo de Dijkstra y BFS
 
     # Se crea el grafo (con los id de los aeropuertos como
     # nodos y con las rutas como aristas) y se cargan los aeropuertos
-
-
     if request.method == 'POST':
         inputSourceAirport = request.form.get('sourceAirportId')
         inputDestinationAirport = request.form.get('destinationAirportId')
         metodo = request.form.get('metodo')
 
         if(metodo == 'id'):
+            source_airport_id = airports.getAirportById(inputSourceAirport)
+            if(source_airport_id == None):
+                return render_template('index.html',  
+                                airportsList=airportsList, error = True,
+                                error_message = 'El id del origen no existe')
+
+            destination_airport_id = airports.getAirportById(inputDestinationAirport)
+            if(destination_airport_id == None):
+                return render_template('index.html',
+                                airportsList=airportsList, error = True,
+                                error_message = 'El id del destino no existe')
+
             source_airport_id = inputSourceAirport
             destination_airport_id = inputDestinationAirport
 
         elif(metodo == 'name'):
             source_airport_id = airports.getAirportByName(inputSourceAirport)
+            if(source_airport_id == None):
+                return render_template('index.html',
+                                airportsList=airportsList, error = True,
+                                error_message = 'El nombre del origen no existe')
+
             destination_airport_id = airports.getAirportByName(inputDestinationAirport)
+            if(destination_airport_id == None):
+                return render_template('index.html',
+                                airportsList=airportsList, error = True,
+                                error_message = 'El nombre del destino no existe')
 
         elif(metodo == 'iata'):
             source_airport_id = airports.getAirportIdByIATA(inputSourceAirport)
+            if (source_airport_id == None):
+                return render_template('index.html',
+                                airportsList=airportsList, error = True,
+                                error_message = 'El código IATA del origen ingresado no existe')
+
             destination_airport_id = airports.getAirportIdByIATA(inputDestinationAirport)
+            if (destination_airport_id == None):
+                return render_template('index.html',
+                                airportsList=airportsList, error = True,
+                                error_message = 'El código IATA del destino ingresado no existe')
 
         elif(metodo == 'icao'): 
             source_airport_id = airports.getAirportIdByICAO(inputSourceAirport)
+            if (source_airport_id == None):
+                return render_template('index.html',
+                                airportsList=airportsList, error = True, 
+                                error_message = 'El código ICAO del origen ingresado no existe')
             destination_airport_id = airports.getAirportIdByICAO(inputDestinationAirport)
-
+            if (destination_airport_id == None):
+                return render_template('index.html', airportsList=airportsList, error = True,
+                                error_message = 'El código ICAO del destino ingresado no existe')
+ 
         else:
             return redirect(url_for('index'))
         # Realizando pruebas con el algoritmo de Dijkstra
         # CaminoDijkstra es una tupla que contiene el peso total y el
         # camino. El camino es una lista de los nodos que se deben recorrer
         # PesototalDijkstra es el peso total del camino (suma de las distancias de las aristas)
-
         origen = airports.getAirportById(source_airport_id)['name']
         destino = airports.getAirportById(destination_airport_id)['name']
 
@@ -108,13 +143,17 @@ def busqueda():
                                origen=origen, 
                                destino=destino, 
                                distanciaBFS = distanciaBFS, 
-                               distanciaDijkstra = distanciaDijkstra)
+                               distanciaDijkstra = distanciaDijkstra,
+                               airportsList=airportsList)
     else:
-        response = make_response(render_template("index.html"))
-        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-        response.headers["Pragma"] = "no-cache"
-        response.headers["Expires"] = "0"
-        return response
+        # response = make_response(render_template("index.html"))
+        
+        # response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        # response.headers["Pragma"] = "no-cache"
+        # response.headers["Expires"] = "0"
+        # return response
+        return render_template('index.html', airportsList=airportsList)
+
 
 
 # Se renderiza el mapa de Dijkstra

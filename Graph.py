@@ -19,6 +19,11 @@ def initGraph():
     airports = ListAirports()
     airports.addFromCSV("static/airports.csv")
 
+    airportsList = ListAirports()
+    airportsList.addFromCSV("static/airportsList.csv")
+    airportsListFull = getAirportsNames(airportsList)
+
+
     # Recorrer la lista de rutas de aviones y agregar los nodos al grafo
     for route in routes.getList():
 
@@ -46,8 +51,31 @@ def initGraph():
 
     grafo.add_weighted_edges_from(listWeightedNodes)
 
-    return grafo, airports
+    return grafo, airports, airportsListFull
+ 
+def getAirportsNames(airportsList: ListAirports):
+    id = []
+    names = []
+    icao = []
+    iata = []
 
+    #iterar el dccionario de aeropuertos y agregar los datos a las listas
+
+    for key, value in airportsList.getList().items():
+        id.append(key)
+        names.append(value['name'])
+        icao.append(value['icao'])
+        iata.append(value['iata'])
+
+    # for airport in airportsList.getList().values():
+    #     id.append(airport['id'])
+    #     names.append(airport['name'])
+    #     icao.append(airport['icao'])
+    #     iata.append(airport['iata'])
+
+    airportsFullList = [id, names, icao, iata]
+
+    return airportsFullList
 
 def calcular_peso(grafo, airport1, airport2):
     return nx.shortest_path_length(grafo, airport1, airport2, weight='weight')
