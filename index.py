@@ -28,7 +28,8 @@ def busqueda():
     destino = 'Pendiente'
     distanciaDijkstra = 0
     distanciaBFS = 0
-    airportsList = airportsListFull   
+    airportsList = airportsListFull
+    pathNotExists = False
     # Pruebas con el algoritmo de Dijkstra y BFS
 
     # Se crea el grafo (con los id de los aeropuertos como
@@ -109,6 +110,7 @@ def busqueda():
         if not camino_dijkstra:
             folium_map = gp.cleanMap()
             folium_map.save('templates/mapDijkstra.html')
+            pathNotExists = True
             
         else:
             # Se crea el mapa con el camino de Dijkstra
@@ -128,6 +130,7 @@ def busqueda():
         if not camino_bfs:
             folium_map = gp.cleanMap()
             folium_map.save('templates/mapBFS.html')
+            pathNotExists = True
 
         else:
             # Se crea el mapa con el camino de BFS
@@ -144,7 +147,8 @@ def busqueda():
                                destino=destino, 
                                distanciaBFS = distanciaBFS, 
                                distanciaDijkstra = distanciaDijkstra,
-                               airportsList=airportsList)
+                               airportsList=airportsList,
+                               pathNotExists = pathNotExists)
     else:
         # response = make_response(render_template("index.html"))
         

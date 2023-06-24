@@ -136,6 +136,10 @@
                     <p>Distancia BFS: {{ distanciaBFS }} km</p>
                 {% endif %}
             </div>
+
+            {% if pathNotExists %}
+                <p>No existe ruta entre los aeropuertos</p>
+            {% endif %}
         </div>
     </div>
     {% endif %}
