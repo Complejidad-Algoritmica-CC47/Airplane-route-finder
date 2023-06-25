@@ -7,8 +7,8 @@
 .map {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 4vh;
-    margin-bottom: 4vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 .map1 {
@@ -39,6 +39,7 @@
     color: whitesmoke;
     margin-left: auto;
     margin-right: auto;
+    font-size: 20px;
 }
 
 h2{
@@ -56,9 +57,9 @@ h2{
 body{
     color: #000;
     font-family: 'Consolas', sans-serif;
-    background: linear-gradient(45deg,  #14114A, #017499);
+    background: linear-gradient(85deg,#2949b3, #192d54, #013a94);
     background-size: 200% 200%;
-    animation: gradient-animation 3s linear infinite;
+    animation: gradient-animation 5s linear infinite;
   }
   
   @keyframes gradient-animation {
@@ -75,7 +76,8 @@ body{
 
 .formulario{
     width: 100%;
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
+    margin-top:8vh;
     /* margin-right: 2vh; */
     display: flex;
     flex-direction:row;
@@ -126,7 +128,6 @@ h1{
     font-size: 25px;    
     color:#ffffff;
     height: fit-content;
-    /* margin-bottom: 10px; */
     margin-top: 0;
     display:flex;
     align-items: center;
@@ -135,17 +136,23 @@ h1{
     z-index: 1000;
     box-shadow: border-box;
     padding: 2vw 0vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10px; 
+    height: 110px;
 }
+
 .title-color{
     color: #ffffff;
 }
 button{
-    color: #000;
     font-size: 15px;
     font-weight: 400;
     color: #fff;
     padding: .5rem 1.5rem;
-    background: rgba(31, 31, 87, 0.742);
+    background: rgba(9, 9, 74, 0.742);
     border: 1px solid rgba(7, 23, 255, 0.185);
     width: 170px;
     /* margin-left: 20px; */
@@ -153,8 +160,8 @@ button{
     border-radius: 5px;
 }
 button:hover {
-    background: rgba(85, 85, 194, 0.742);
-    cursor: pointer;
+    color: rgba(6, 32, 6, 0.532);
+    background:#ffffff;
 }
 .botton_e_informacion label {
     margin-top: 28px;
