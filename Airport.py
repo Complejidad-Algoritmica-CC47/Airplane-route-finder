@@ -71,18 +71,7 @@ class ListAirports:
                 if indice == 0:
                     indice += 1
                     continue
-
-                # airport = Airport(
-                #     row[0],         # id
-                #     row[1],         # name
-                #     row[2],         # city
-                #     row[3],         # country
-                #     float(row[6]),  # latitude
-                #     float(row[7]),  # longitude
-                #     float(row[8])   # altitude
-                #     )
-                # self.addAirport(airport)
-
+                
                 airport = {     
                     # 'id': row[0],         # id
                     'name': row[1],         # name

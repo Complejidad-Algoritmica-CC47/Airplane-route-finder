@@ -1,13 +1,11 @@
 {% extends "main.html" %}
 {% block content %}
-</body>
-</html>
+
 <div class="anima">
-    <div class="titulo"> 
-        <h1>BÚSQUEDA DE LA RUTA MÁS ÓPTIMA</h1>
-    </div>
+
     <div class="formulario">
-        <form action="{{ url_for('busqueda')}}" method="post" onchange="validateInputs()">
+        <form action="{{ url_for('busqueda')}}" method="post"
+            onchange="validateInputs()">
             <label for="metodo">Método de búsqueda:</label>
             <!-- <select name="metodo" id="metodo" class="form-control-select">
                 <option value="id"  >Buscar por ID      </option>
@@ -16,27 +14,27 @@
                 <option value="iata">Buscar por IATA    </option>
             </select> -->
 
-            <select 
-                class="form-select mb-3" 
-                name="metodo" 
-                id="metodo" 
+            <select
+                class="form-select mb-3"
+                name="metodo"
+                id="metodo"
                 aria-label="Default select example"
                 onchange="validateInputs()">
-                <option value="id"  >Buscar por ID    </option>
+                <option value="id">Buscar por ID </option>
                 <option value="name">Buscar por nombre</option>
-                <option value="icao">Buscar por ICAO  </option>
-                <option value="iata">Buscar por IATA  </option>
+                <option value="icao">Buscar por ICAO </option>
+                <option value="iata">Buscar por IATA </option>
             </select>
 
             <label for="origen">Aeropuerto de Origen</label>
             <div class="input-group mb-3">
                 <span class="input-group-text bi bi-airplane" id="basic-addon1">
                 </span>
-                <input 
+                <input
                     list="airportsIdList"
-                    type="text" 
-                    class="form-control" 
-                    name="sourceAirportId" 
+                    type="text"
+                    class="form-control"
+                    name="sourceAirportId"
                     placeholder="Ingrese el aeropuerto de origen..."
                     oninput="validateInputs()"
                     aria-describedby="basic-addon1">
@@ -51,11 +49,11 @@
             <div class="input-group mb-3">
                 <span class="input-group-text bi bi-airplane" id="basic-addon1">
                 </span>
-                <input 
+                <input
                     list="airportsIdList"
-                    type="text" 
-                    class="form-control" 
-                    name="destinationAirportId" 
+                    type="text"
+                    class="form-control"
+                    name="destinationAirportId"
                     placeholder="Ingrese el aeropuerto de destino..."
                     oninput="validateInputs()"
                     aria-describedby="basic-addon1">
@@ -65,8 +63,8 @@
                 class="form-control" 
                 name="destinationAirportId" 
                 placeholder="  Ingrese el aeropuerto de destino..."> -->
-            <button 
-                type="submit" 
+            <button
+                type="submit"
                 class="btn btn-primary mt-1"
                 disabled>
                 Calcular
@@ -96,21 +94,25 @@
                 {% endfor %}
             </datalist>
 
-            
-            
         </form>
     </div>
     {% if error %}
-    <div class="toast show position-absolute top-0 end-0 toast-pos" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+    <div class="toast show position-absolute top-0 end-0 toast-pos bg-danger"
+        style="width: fit-content;"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-delay="3000">
         <div class="toast-header">
-          <strong class="me-auto">Error</strong>
-          <small class="text-muted">Cerrar</small>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <strong class="me-auto">Error</strong>
+            <small class="text-muted">Cerrar</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
-        <div class="toast-body">
-          {{error_message}}
+        <div class="toast-body text-white" style="padding-right: 10vw;">
+            {{error_message}}
         </div>
-      </div>
+    </div>
     {% endif %}
 
     {% if origen %}
@@ -119,26 +121,29 @@
         <div class="flex-column">
             <div>
                 {% if origen %}
-                    <p>Origen: {{ origen }}</p>
+                <p><b style="color: #fd3b3b;">Origen:</b> {{ origen }}</p>
                 {% endif %}
-                
+
                 {% if destino %}
-                    <p>Destino: {{ destino }}</p>
+                <p><b style="color: rgb(0, 185, 0)">Destino:</b> {{ destino }}</p>
                 {% endif %}
             </div>
-            
+
             <div>
                 {% if distanciaDijkstra %}
-                    <p>Distancia Dijsktra: {{ distanciaDijkstra }} km</p>
+                <p><b>Distancia Dijsktra:</b> {{ distanciaDijkstra }} km</p>
                 {% endif %}
-                
+
                 {% if distanciaBFS %}
-                    <p>Distancia BFS: {{ distanciaBFS }} km</p>
+                <p style="margin-bottom: 0;"><b>Distancia BFS:</b> {{
+                    distanciaBFS }} km</p>
                 {% endif %}
             </div>
 
             {% if pathNotExists %}
-                <p>No existe ruta entre los aeropuertos</p>
+            <p
+                style="font-size: large; font-weight: bold; color: #fd3b3b; margin: 0px;">No
+                existe ruta entre los aeropuertos</p>
             {% endif %}
         </div>
     </div>
@@ -229,19 +234,18 @@
             }
         }
     </script>
+    <div class="map">
+        <h2 style="margin-bottom: 0px;">MAPA CON ALGORITMO DIJKSTRA</h2>
+        <iframe class="mapa" src="{{ url_for('mapDijkstra') }}"></iframe>
+    </div>
 
-</div>
-
-<div class="map">
-    <h2>MAPA CON ALGORITMO DIJKSTRA</h2>
-    <iframe class="mapa" src="{{ url_for('mapDijkstra') }}"></iframe>
-</div>
-
-<div class="map1">
-    <h2>MAPA CON MÉTODO BFS</h2>
-    <iframe class="mapa" src="{{ url_for('mapBFS') }}"></iframe>
-{#    <a href="{{ url_for('mapDijkstra') }}" target="_blank">Mapa de Dijsktra</a>#}
-{#    <a href="{{ url_for('mapBFS') }}" target="_blank">Mapa de BFS</a>#}
+    <div class="map">
+        <h2 style="margin-bottom: 0px;">MAPA CON MÉTODO BFS</h2>
+        <iframe class="mapa" src="{{ url_for('mapBFS') }}"></iframe>
+        {# <a href="{{ url_for('mapDijkstra') }}" target="_blank">Mapa de
+            Dijsktra</a>#}
+        {# <a href="{{ url_for('mapBFS') }}" target="_blank">Mapa de BFS</a>#}
+    </div>
 </div>
 
 <div class="datos">

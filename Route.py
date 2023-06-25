@@ -123,4 +123,3 @@ class ListRoutes:
                 indice += 1
 
         print(f"Se han leído {indice} rutas de aviones")
-

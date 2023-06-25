@@ -12,10 +12,10 @@ def dijkstrav2(G,u,v):
     else:
         print("Iniciando Dijkstra...")
         masinf=float('inf')
-        vertices=list(G.nodes)
-        distancias={w:masinf for w in vertices}
-        fijos={w:False for w in vertices}
-        padres={w:None for w in vertices}
+        nodos=list(G.nodes)
+        distancias={w:masinf for w in nodos}
+        fijos={w:False for w in nodos}
+        padres={w:None for w in nodos}
         distancias[u]=0
         fijos[u]=True
         nuevo_fijo=u
@@ -31,7 +31,7 @@ def dijkstrav2(G,u,v):
 
             # Encontrar el nuevo a fijar.
             mas_chica=masinf
-            for w in vertices:
+            for w in nodos:
                 if fijos[w]==False and distancias[w]<mas_chica:
                     optimo=w
                     mas_chica=distancias[w]

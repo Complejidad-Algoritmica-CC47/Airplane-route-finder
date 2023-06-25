@@ -8,7 +8,6 @@ import Route as rts
 # Configurar la salida estándar con una codificación adecuada
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-
 def initGraph():
     grafo = nx.Graph()
     listWeightedNodes = []
@@ -60,18 +59,11 @@ def getAirportsNames(airportsList: ListAirports):
     iata = []
 
     #iterar el dccionario de aeropuertos y agregar los datos a las listas
-
     for key, value in airportsList.getList().items():
         id.append(key)
         names.append(value['name'])
         icao.append(value['icao'])
         iata.append(value['iata'])
-
-    # for airport in airportsList.getList().values():
-    #     id.append(airport['id'])
-    #     names.append(airport['name'])
-    #     icao.append(airport['icao'])
-    #     iata.append(airport['iata'])
 
     airportsFullList = [id, names, icao, iata]
 
@@ -106,7 +98,6 @@ def drawMap(grafo, camino, listAirports: ListAirports):
 
             airportsAdded.append(arpt)
 
-            # print("Aeropuerto: ", arpt)
             airport = listAirports.getAirportById(arpt)
             airportPosition = (airport['latitude'], airport['longitude'])
             routesPositions.append(airportPosition)
@@ -118,7 +109,7 @@ def drawMap(grafo, camino, listAirports: ListAirports):
                                        color=_color)
                           ))
 
-            # Iterar sobre la ruta y agregar las aristas con los pesos como popup
+    # Iterar sobre la ruta y agregar las aristas con los pesos como popup
     for i in range(len(camino) - 1):
         airport1 = camino[i]
         airport2 = camino[i + 1]
@@ -128,12 +119,10 @@ def drawMap(grafo, camino, listAirports: ListAirports):
         listAirports.getAirportById(airport2)['latitude'], listAirports.getAirportById(airport2)['longitude'])
 
         if position1 and position2:
-            peso = calcular_peso(grafo, airport1, airport2)
+            peso = round(calcular_peso(grafo, airport1, airport2), 2)
 
             # Crear la arista y agregar el popup con el peso
             fl.PolyLine([position1, position2], color='purple', weight=2, opacity=0.5,
-                        popup=f'Distancia: {peso}').add_to(map)
+                        popup=f'Distancia: {peso} km').add_to(map)
 
-    # print("Rutas: ", grafo.edges(data=True))
-    # fl.PolyLine(routesPositions, color=colors.pop(0), weight=2, opacity=0.6).add_to(map)
     return map
